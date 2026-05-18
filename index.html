@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Tasya Kirani Azis 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrolling, keep it app-like */
+            color: #d81b60;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Glassmorphism Theme */
+        .glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Pages */
+        .page {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s;
+            padding: 20px;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Page 1: Intro Animation */
+        .intro-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            line-height: 1.5;
+            animation: pulseText 2s infinite, float 3s ease-in-out infinite;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Page 2: The Book */
+        .book-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            perspective: 1500px;
+            margin: 20px 0;
+        }
+        .book-page-wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.6s ease;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #ffb6c1;
+            background-size: cover;
+            background-position: center;
+        }
+        .book-controls {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        /* Page 3: Love Puzzle Game */
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 5px;
+            margin: 20px 0;
+        }
+        .puzzle-cell {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .puzzle-cell:active { transform: scale(0.9); }
+        .puzzle-cell.filled {
+            background: #ff477e;
+            box-shadow: 0 0 10px #ff477e;
+        }
+
+        /* Page 4: Menus */
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 350px;
+        }
+        .menu-btn {
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: #ff4d6d;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s;
+        }
+        .menu-btn:active { transform: scale(0.95); }
+        
+        /* Modal for Page 4 */
+        .modal {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 90%; max-width: 400px;
+            padding: 30px 20px;
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .modal.show {
+            opacity: 1; visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.5rem;
+            color: #d81b60;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .modal-content-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: justify;
+            color: #880e4f;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Page 5: Closing */
+        .closing-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #880e4f;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        .tasyhid {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            color: #ff0055;
+            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+        }
+
+        /* Global Buttons */
+        .next-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ff4d6d;
+            background: white;
+            border: 2px solid #ff4d6d;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none; /* Hidden by default */
+        }
+        .next-btn:hover { background: #ff4d6d; color: white; }
+
+        /* Animations */
+        @keyframes pulseText {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
+            to { text-shadow: 0 0 20px #ff0055, 0 0 30px #ff0055; }
+        }
+
+        /* Floating Hearts Background */
+        .bg-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 24px;
+            animation: flyUp 5s linear infinite;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        @keyframes flyUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Hearts -->
+    <div id="bg-hearts-container"></div>
+
+    <!-- PAGE 1: INTRO -->
+    <div id="page1" class="page active">
+        <div class="intro-text">
+            HAPPY BIRTHDAY SAYANGKU🫶🏻❤️<br>
+            TASYA KIRANI AZIS🫶🏻💖✨
+        </div>
+    </div>
+
+    <!-- PAGE 2: BUKU FOTO -->
+    <div id="page2" class="page">
+        <h2 class="glass" style="margin-bottom: 10px; font-size: 1.2rem;">Selamat Membuka Lembaran Baru Cintaku! 📖💖</h2>
+        <div class="book-container">
+            <div id="book-page" class="book-page-wrap" style="background-image: url('fotov1.png');">
+                <span id="page-placeholder">Cover (fotov1.png)</span>
+            </div>
+        </div>
+        <div class="book-controls">
+            <button class="next-btn" style="display: block;" onclick="prevPage()">⬅️ Geser Kiri</button>
+            <button class="next-btn" style="display: block;" onclick="nextPage()">Geser Kanan ➡️</button>
+        </div>
+        <button id="btn-to-page3" class="next-btn" onclick="goToPage(3)">Lanjut ke Halaman 3 ➡️</button>
+    </div>
+
+    <!-- PAGE 3: LOVE BLOCK BLAST GAME -->
+    <div id="page3" class="page">
+        <h2 class="glass" style="font-size: 1.1rem; padding: 15px;">Susun Blok Ini Jadi Bentuk Hati Ya Sayang! 🧩💖<br><span style="font-size:0.8rem; font-weight:normal;">(Tap kotak-kotaknya)</span></h2>
+        
+        <div class="puzzle-grid" id="puzzle">
+            <!-- Grid generated by JS -->
+        </div>
+
+        <h3 id="puzzle-success" style="display:none; color: #ff0055; margin-top: 15px; animation: pulseText 1s infinite;">Hati Kita Udah Utuh! 🫶🏻💖</h3>
+        <button id="btn-to-page4" class="next-btn" onclick="goToPage(4)">Lanjut ke Menu Utama ➡️</button>
+    </div>
+
+    <!-- PAGE 4: MENU UTAMA -->
+    <div id="page4" class="page">
+        <div class="glass" style="width: 90%; max-width: 400px; padding: 30px 20px;">
+            <h2 style="margin-bottom: 25px; font-family: 'Pacifico';">Pesan Spesial Untukmu 💌</h2>
+            <div class="menu-grid">
+                <button class="menu-btn" onclick="openModal('modal-kiri')">1. Pesan Dari Hati (Kiri)</button>
+                <button class="menu-btn" onclick="openModal('modal-tengah')">2. Tentang Website Ini (Tengah)</button>
+                <button class="menu-btn" onclick="openModal('modal-kanan')">3. Siapa Pembuatnya? (Kanan)</button>
+            </div>
+            <button class="next-btn" style="display: block; width: 100%; margin-top: 25px;" onclick="goToPage(5)">Lanjut ke Halaman 5 ➡️</button>
+        </div>
+
+        <!-- Modals -->
+        <div id="modal-kiri" class="glass modal">
+            <span class="close-btn" onclick="closeModal('modal-kiri')">✖</span>
+            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Untuk Istriku Tersayang 💖</h3>
+            <div class="modal-content-text">
+                Selamat ulang tahun, sayangku, Tasya Kirani Azis! 💖✨<br><br>
+                Di hari yang sangat spesial ini, aku cuma ingin kamu tahu betapa bersyukurnya aku memilikimu. Aku tahu perjalanan kita nggak selalu mulus, kadang ada ombak dan ego yang menghalangi. Tapi percayalah, cintaku jauh lebih besar dari segala masalah yang ada. Aku nggak akan pernah menyerah untuk kita.<br><br>
+                Aku berkomitmen untuk terus membuktikan rasa sayangku, bukan cuma lewat kata-kata, tapi lewat setiap tindakan dan usahaku membahagiakanmu. Aku nggak akan pernah lari dari masalah, karena tempatku pulang selamanya adalah kamu. Semoga di umur yang baru ini, kamu semakin bahagia, sehat, dan selalu dalam lindungan-Nya. Aku mencintaimu lebih dari yang bisa dijelaskan oleh kode dan logika apapun. 🫶🏻
+            </div>
+        </div>
+
+        <div id="modal-tengah" class="glass modal">
+            <span class="close-btn" onclick="closeModal('modal-tengah')">✖</span>
+            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Dibalik Layar Website Ini 💻</h3>
+            <div class="modal-content-text">
+                Website ini dibuat sepenuh hati oleh suamimu, Fadly Rahman Al Wahid. 🧑🏻‍💻<br><br>
+                Setiap baris kode, setiap animasi yang bergerak, dan setiap warna pink yang ada di sini dirangkai khusus hanya untuk satu tujuan: melihat senyum manis di wajah Tasya Kirani Azis di hari ulang tahunnya. <br><br>
+                Mungkin ini terlihat sederhana, tapi ini adalah bentuk usahaku untuk memberikan sesuatu yang istimewa, mewah, dan abadi di dunia digital, sama seperti cintaku padamu di dunia nyata. Ini adalah caraku merayakan keberadaanmu yang sangat berharga dalam hidupku.
+            </div>
+        </div>
+
+        <div id="modal-kanan" class="glass modal">
+            <span class="close-btn" onclick="closeModal('modal-kanan')">✖</span>
+            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Sang Pembuat (Developer) 🐻</h3>
+            <div class="modal-content-text">
+                <b>Pembuat Website:</b> Fadly Rahman Al Wahid (Ndut) 🐻<br><br>
+                <b>Tujuan Dibuatnya Website Ini:</b> Sebagai perayaan paling tulus dan spesial dari Ndut kepada istrinya tercinta. <br><br>
+                Website ini adalah bukti nyata bahwa Ndut selalu berusaha memberikan yang terbaik. Ndut ingin memastikan bahwa kamu merasa dirayakan, dihargai, dan dicintai sepenuhnya. Ndut janji akan terus ada, sabar menjaga hati kita, dan terus berinovasi untuk bikin istri Ndut selalu tersenyum bahagia setiap harinya! 💖✨
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: PENUTUP -->
+    <div id="page5" class="page">
+        <div class="glass" style="width: 90%; max-width: 450px;">
+            <div class="closing-text">
+                Terima kasih sudah bertahan bersamaku, menjadi kekuatanku, dan melengkapi separuh jiwaku. Mari kita terus genggam tangan satu sama lain, meredam ego dengan kasih sayang, dan membangun masa depan yang indah bersama.<br><br>
+                Selamat Ulang Tahun, Bidadariku.
+            </div>
+            <div class="tasyhid">TASYHID SELAMANYA🫶🏻💖✨</div>
+        </div>
+    </div>
+
+    <script>
+        // BACKGROUND HEARTS ANIMATION
+        function createHearts() {
+            const container = document.getElementById('bg-hearts-container');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('bg-heart');
+                heart.innerText = ['❤️', '💖', '✨', '🫶🏻'][Math.floor(Math.random() * 4)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+                container.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 6000);
+            }, 500);
+        }
+        createHearts();
+
+        // PAGE NAVIGATION
+        function goToPage(pageNum) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + pageNum).classList.add('active');
+        }
+
+        // PAGE 1 TO PAGE 2 AUTO TRANSITION
+        setTimeout(() => {
+            goToPage(2);
+        }, 4500); // Intro plays for 4.5 seconds
+
+        // PAGE 2: BOOK LOGIC
+        const images = ['fotov1.png', 'fotov2.png', 'fotov3.png', 'fotov4.png'];
+        let currentImgIndex = 0;
+        const bookPage = document.getElementById('book-page');
+        let pagesViewed = 0;
+
+        function updateBook() {
+            bookPage.style.backgroundImage = `url('${images[currentImgIndex]}')`;
+            // Sembunyikan teks placeholder jika foto gagal diload
+            document.getElementById('page-placeholder').innerText = `Halaman ${currentImgIndex + 1} (${images[currentImgIndex]})`;
+            document.getElementById('page-placeholder').style.opacity = "0.5";
+            
+            if (currentImgIndex === images.length - 1) {
+                document.getElementById('btn-to-page3').style.display = 'block';
+            }
+        }
+
+        function nextPage() {
+            if (currentImgIndex < images.length - 1) {
+                currentImgIndex++;
+                updateBook();
+            }
+        }
+        function prevPage() {
+            if (currentImgIndex > 0) {
+                currentImgIndex--;
+                updateBook();
+            }
+        }
+
+        // PAGE 3: LOVE PUZZLE GAME
+        const puzzleGrid = document.getElementById('puzzle');
+        // Kordinat array untuk membentuk hati di grid 5x5 (indeks 0-24)
+        const heartPattern = [1, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 22]; 
+        let clickedCells = new Set();
+
+        for (let i = 0; i < 25; i++) {
+            let cell = document.createElement('div');
+            cell.classList.add('puzzle-cell');
+            cell.onclick = function() {
+                if (this.classList.contains('filled')) {
+                    this.classList.remove('filled');
+                    clickedCells.delete(i);
+                } else {
+                    this.classList.add('filled');
+                    clickedCells.add(i);
+                }
+                checkWin();
+            };
+            puzzleGrid.appendChild(cell);
+        }
+
+        function checkWin() {
+            let isWin = true;
+            if (clickedCells.size !== heartPattern.length) isWin = false;
+            heartPattern.forEach(val => {
+                if (!clickedCells.has(val)) isWin = false;
+            });
+
+            if (isWin) {
+                document.getElementById('puzzle-success').style.display = 'block';
+                document.getElementById('btn-to-page4').style.display = 'block';
+                // Lock the grid
+                puzzleGrid.style.pointerEvents = 'none';
+            }
+        }
+
+        // PAGE 4: MODALS
+        function openModal(id) {
+            document.getElementById(id).classList.add('show');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+    </script>
+</body>
+</html>

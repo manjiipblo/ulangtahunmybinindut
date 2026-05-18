@@ -1,1 +1,0 @@
-# MANJII iOS Dylib Project

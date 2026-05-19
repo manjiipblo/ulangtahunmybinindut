@@ -3,436 +3,540 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Tasya Kirani Azis 💖</title>
+    <title>Happy Birthday Sayangku 💖</title>
+    <!-- Menggunakan Font Prompt Sesuai Request -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             user-select: none;
+            font-family: 'Prompt', sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: linear-gradient(135deg, #ffe3e8 0%, #ffb6c1 100%);
             min-height: 100vh;
-            overflow: hidden; /* Prevent scrolling, keep it app-like */
-            color: #d81b60;
+            overflow: hidden;
+            color: #c2185b;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Glassmorphism Theme */
-        .glass {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.2);
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Pages */
-        .page {
+        /* --- BACKGROUND ANIMASI LOVE --- */
+        #bg-hearts {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .floating-heart {
+            position: absolute;
+            bottom: -10%;
+            font-size: 24px;
+            animation: floatUp linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-120vh) scale(1.4) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- GLOBAL CONTAINER HALAMAN --- */
+        .page {
+            position: absolute;
+            width: 100%; height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease-in-out, visibility 1s;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            z-index: 5;
             padding: 20px;
         }
-
         .page.active {
             opacity: 1;
             visibility: visible;
         }
 
-        /* Page 1: Intro Animation */
-        .intro-text {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.5rem;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.25);
+            padding: 30px;
             text-align: center;
-            line-height: 1.5;
-            animation: pulseText 2s infinite, float 3s ease-in-out infinite;
-            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            max-width: 450px;
+            width: 95%;
         }
 
-        /* Page 2: The Book */
-        .book-container {
-            position: relative;
-            width: 300px;
-            height: 400px;
-            perspective: 1500px;
-            margin: 20px 0;
+        h1, h2, h3 {
+            font-weight: 800; /* Extra Bold */
         }
-        .book-page-wrap {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0; left: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.6s ease;
-            background-color: white;
+
+        /* --- SCREEN LOADING INTERAKTIF (CAPYBARA) --- */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffe3e8;
+            z-index: 999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #ffb6c1;
-            background-size: cover;
-            background-position: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s easy;
         }
-        .book-controls {
-            display: flex;
-            gap: 20px;
+        #loading-screen.show {
+            opacity: 1; visibility: visible;
+        }
+        
+        /* Animasi Capybara Berjalan Semakin Lucu */
+        .capybara-container {
+            width: 80%;
+            max-width: 300px;
+            position: relative;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        .capybara {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 55px; height: 45px;
+            background: #8d6e63;
+            border-radius: 20px 25px 15px 15px;
+            box-shadow: inset -4px -4px 0 rgba(0,0,0,0.1);
+            transform: translateX(-50%);
+            transition: left 0.1s linear;
+        }
+        /* Detail Kepala & Telinga Capybara */
+        .capybara::before {
+            content: '';
+            position: absolute;
+            top: 5px; right: -5px; width: 20px; height: 20px;
+            background: #8d6e63; border-radius: 50%;
+        }
+        .capybara::after {
+            content: '👀'; font-size: 8px;
+            position: absolute; top: 8px; right: 0px;
+        }
+        .capybara-ear {
+            position: absolute; top: 0; left: 15px;
+            width: 8px; height: 8px; background: #6d4c41; border-radius: 50%;
+        }
+        /* Kaki Capybara yang Bergerak Jalan */
+        .capybara-leg {
+            position: absolute; bottom: -5px; width: 6px; height: 8px;
+            background: #5d4037; border-radius: 3px;
+        }
+        .leg-1 { left: 10px; animation: walk 0.3s infinite alternate; }
+        .leg-2 { left: 20px; animation: walk 0.3s infinite alternate-reverse; }
+        .leg-3 { right: 15px; animation: walk 0.3s infinite alternate; }
+        .leg-4 { right: 25px; animation: walk 0.3s infinite alternate-reverse; }
+        @keyframes walk { 0% { transform: rotate(-20deg); } 100% { transform: rotate(20deg); } }
+
+        .load-bar-bg {
+            width: 80%; max-width: 300px; height: 20px;
+            background: rgba(255,255,255,0.6); border-radius: 10px;
+            border: 2px solid #ff4d6d; overflow: hidden; position: relative;
+        }
+        .load-bar-fill {
+            width: 0%; height: 100%;
+            background: linear-gradient(90deg, #ff758c, #ff4d6d);
+            transition: width 0.1s linear;
+            display: flex; align-items: center; justify-content: flex-end;
+        }
+        .load-text {
+            font-weight: 800; font-size: 1.2rem; color: #ff4d6d; margin-top: 10px;
+        }
+
+        /* --- MENU 1: TEXT INTRO --- */
+        .intro-box {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.5;
+            color: #ff0055;
+            animation: fadeInOutText 5s ease-in-out forwards;
+        }
+        @keyframes fadeInOutText {
+            0% { opacity: 0; transform: scale(0.9); filter: blur(5px); }
+            25% { opacity: 1; transform: scale(1.03); filter: blur(0); }
+            75% { opacity: 1; transform: scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: scale(0.95); filter: blur(5px); }
+        }
+
+        /* --- MENU 2: BUKU MEMOAR --- */
+        .celebration-banner {
+            background: #ff4d6d; color: white; padding: 10px;
+            border-radius: 12px; font-weight: 700; font-size: 0.9rem;
+            margin-bottom: 15px; animation: pulse 1.5s infinite;
+            box-shadow: 0 4px 10px rgba(255,77,109,0.3);
+        }
+        .book-box {
+            position: relative; width: 280px; height: 360px; margin: 15px 0;
+            perspective: 1000px;
+        }
+        .book-canvas {
+            width: 100%; height: 100%; background: #fff;
+            border-radius: 16px; border: 6px solid #ffb6c1;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background-size: cover; background-position: center;
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 0.5s ease;
+        }
+        .book-cover-design {
+            padding: 20px; text-align: center; font-weight: 800;
+            font-size: 1.6rem; color: #d81b60; line-height: 1.4;
+        }
+        .book-nav-btns { display: flex; gap: 15px; margin-top: 10px; }
+
+        /* --- MENU 3: GAME LOVE BLOCKS --- */
+        .block-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+            margin: 20px 0; padding: 10px;
+        }
+        .love-shape-block {
+            width: 55px; height: 55px; position: relative; cursor: pointer;
+        }
+        .love-shape-block::before, .love-shape-block::after {
+            content: ""; position: absolute; top: 0; width: 28px; height: 45px;
+            border-radius: 28px 28px 0 0; background-color: rgba(255,255,255,0.7);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .love-shape-block::before { left: 27px; transform: rotate(-45deg); transform-origin: 0 100%; }
+        .love-shape-block::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+        .love-shape-block.active::before, .love-shape-block.active::after {
+            background-color: #ff0055; filter: drop-shadow(0 0 6px #ff0055);
+        }
+
+        /* --- MENU 4: 3 HORIZONTAL MENU & MODAL --- */
+        .horizontal-menu-container {
+            display: flex; flex-direction: row; justify-content: space-between;
+            gap: 10px; width: 100%; margin: 20px 0;
+        }
+        .horizontal-btn {
+            flex: 1; padding: 15px 5px; font-size: 0.85rem; font-weight: 700;
+            color: white; background: linear-gradient(45deg, #ff4d6d, #ff758c);
+            border: none; border-radius: 14px; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3); transition: transform 0.2s;
+        }
+        .horizontal-btn:active { transform: scale(0.95); }
+
+        .custom-popup {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 92%; max-width: 430px; background: white;
+            border-radius: 20px; padding: 30px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            z-index: 100; border: 3px solid #ffb6c1;
+        }
+        .custom-popup.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        .btn-popup-back {
+            position: absolute; top: 12px; right: 12px;
+            background: #ff4d6d; color: white; border: none;
+            padding: 5px 12px; border-radius: 12px; font-weight: 700;
+            font-size: 0.8rem; cursor: pointer;
+        }
+        .popup-scroll-text {
+            font-size: 0.95rem; line-height: 1.7; text-align: justify;
+            color: #444; max-height: 280px; overflow-y: auto; padding-right: 5px;
             margin-top: 15px;
         }
 
-        /* Page 3: Love Puzzle Game */
-        .puzzle-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 50px);
-            grid-template-rows: repeat(5, 50px);
-            gap: 5px;
-            margin: 20px 0;
+        /* --- MENU 5: PENUTUP --- */
+        .tasyhid-forever {
+            font-size: 2.2rem; font-weight: 800; color: #ff0055;
+            margin-top: 25px; display: inline-block;
+            animation: bounceGlow 2s infinite alternate;
         }
-        .puzzle-cell {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .puzzle-cell:active { transform: scale(0.9); }
-        .puzzle-cell.filled {
-            background: #ff477e;
-            box-shadow: 0 0 10px #ff477e;
+        @keyframes bounceGlow {
+            0% { transform: translateY(0) scale(1); text-shadow: 0 0 10px #ff758c; }
+            100% { transform: translateY(-10px) scale(1.05); text-shadow: 0 0 25px #ff0055; }
         }
 
-        /* Page 4: Menus */
-        .menu-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 350px;
+        /* BUTTON NAVIGASI GLOBAL */
+        .action-btn {
+            padding: 12px 28px; font-weight: 700; font-size: 1rem;
+            background: white; color: #ff4d6d; border: 2px solid #ff4d6d;
+            border-radius: 30px; cursor: pointer; transition: all 0.3s;
         }
-        .menu-btn {
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            background: #ff4d6d;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-            transition: transform 0.2s;
-        }
-        .menu-btn:active { transform: scale(0.95); }
-        
-        /* Modal for Page 4 */
-        .modal {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 90%; max-width: 400px;
-            padding: 30px 20px;
-            opacity: 0; visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        .modal.show {
-            opacity: 1; visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 1.5rem;
-            color: #d81b60;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .modal-content-text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            text-align: justify;
-            color: #880e4f;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        /* Page 5: Closing */
-        .closing-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #880e4f;
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 0 20px;
-        }
-        .tasyhid {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.2rem;
-            color: #ff0055;
-            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
-        }
-
-        /* Global Buttons */
-        .next-btn {
-            margin-top: 20px;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #ff4d6d;
-            background: white;
-            border: 2px solid #ff4d6d;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: none; /* Hidden by default */
-        }
-        .next-btn:hover { background: #ff4d6d; color: white; }
-
-        /* Animations */
-        @keyframes pulseText {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
-            to { text-shadow: 0 0 20px #ff0055, 0 0 30px #ff0055; }
-        }
-
-        /* Floating Hearts Background */
-        .bg-heart {
-            position: absolute;
-            bottom: -50px;
-            font-size: 24px;
-            animation: flyUp 5s linear infinite;
-            opacity: 0.6;
-            z-index: -1;
-        }
-        @keyframes flyUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.8; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
+        .action-btn:hover { background: #ff4d6d; color: white; }
+        .hidden { display: none !important; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <!-- Floating Background Hearts -->
-    <div id="bg-hearts-container"></div>
+    <!-- Animasi Taburan Love -->
+    <div id="bg-hearts"></div>
 
-    <!-- PAGE 1: INTRO -->
+    <!-- GLOBAL LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="capybara-container">
+            <div class="capybara" id="capybara-sprite">
+                <div class="capybara-ear"></div>
+                <div class="capybara-leg leg-1"></div>
+                <div class="capybara-leg leg-2"></div>
+                <div class="capybara-leg leg-3"></div>
+                <div class="capybara-leg leg-4"></div>
+            </div>
+        </div>
+        <div class="load-bar-bg">
+            <div class="load-bar-fill" id="load-progress"></div>
+        </div>
+        <div class="load-text" id="load-percentage">0%</div>
+        <p style="margin-top: 5px; font-size: 0.8rem; font-weight: 700; color: #ff758c;">Mempersiapkan Kebahagiaan... 💖</p>
+    </div>
+
+    <!-- HALAMAN 1: INTRO TEKS -->
     <div id="page1" class="page active">
-        <div class="intro-text">
+        <div class="intro-box">
             HAPPY BIRTHDAY SAYANGKU🫶🏻❤️<br>
             TASYA KIRANI AZIS🫶🏻💖✨
         </div>
     </div>
 
-    <!-- PAGE 2: BUKU FOTO -->
+    <!-- HALAMAN 2: BUKU FOTO INTERAKTIF -->
     <div id="page2" class="page">
-        <h2 class="glass" style="margin-bottom: 10px; font-size: 1.2rem;">Selamat Membuka Lembaran Baru Cintaku! 📖💖</h2>
-        <div class="book-container">
-            <div id="book-page" class="book-page-wrap" style="background-image: url('fotov1.png');">
-                <span id="page-placeholder">Cover (fotov1.png)</span>
+        <div class="glass-panel">
+            <div class="celebration-banner">🎉 SELAMAT HARI ULANG TAHUN ISTRIKU! 🎉</div>
+            
+            <div class="book-box">
+                <div id="book-surface" class="book-canvas">
+                    <div id="cover-view" class="book-cover-design">📖<br>BUKU MANIS ISTLIKU<br> ( NDUTT ) ✨</div>
+                </div>
             </div>
+
+            <div class="book-nav-btns">
+                <button class="action-btn" onclick="turnLeft()">⬅️ Geser Kiri</button>
+                <button class="action-btn" onclick="turnRight()">Geser Kanan ➡️</button>
+            </div>
+
+            <button id="nav-to-p3" class="horizontal-btn hidden" style="margin-top: 20px;" onclick="switchPageWithLoading(3)">Lanjut Ke Halaman 3 ➡️</button>
         </div>
-        <div class="book-controls">
-            <button class="next-btn" style="display: block;" onclick="prevPage()">⬅️ Geser Kiri</button>
-            <button class="next-btn" style="display: block;" onclick="nextPage()">Geser Kanan ➡️</button>
-        </div>
-        <button id="btn-to-page3" class="next-btn" onclick="goToPage(3)">Lanjut ke Halaman 3 ➡️</button>
     </div>
 
-    <!-- PAGE 3: LOVE BLOCK BLAST GAME -->
+    <!-- HALAMAN 3: GAME LOVE BLOCK BLAST -->
     <div id="page3" class="page">
-        <h2 class="glass" style="font-size: 1.1rem; padding: 15px;">Susun Blok Ini Jadi Bentuk Hati Ya Sayang! 🧩💖<br><span style="font-size:0.8rem; font-weight:normal;">(Tap kotak-kotaknya)</span></h2>
-        
-        <div class="puzzle-grid" id="puzzle">
-            <!-- Grid generated by JS -->
-        </div>
+        <div class="glass-panel">
+            <h2 style="color: #ff0055; font-size: 1.6rem; margin-bottom: 5px;">Love Block Blast! 🧩</h2>
+            <p style="font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;">Tap semua block berbentuk hati untuk menyatukan cinta kita!</p>
+            
+            <div class="block-grid" id="puzzle-board">
+                <!-- Di-generate otomatis oleh JS -->
+            </div>
 
-        <h3 id="puzzle-success" style="display:none; color: #ff0055; margin-top: 15px; animation: pulseText 1s infinite;">Hati Kita Udah Utuh! 🫶🏻💖</h3>
-        <button id="btn-to-page4" class="next-btn" onclick="goToPage(4)">Lanjut ke Menu Utama ➡️</button>
+            <p id="puzzle-win-msg" class="hidden" style="color: #ff0055; font-weight: 800; margin-bottom: 15px; animation: pulse 1s infinite;">Hati Kita Sudah Terkunci Sempurna! 🫶🏻💖</p>
+            <button id="nav-to-p4" class="horizontal-btn hidden" onclick="switchPageWithLoading(4)">Lanjutkan Ke Menu Selanjutnya ➡️</button>
+        </div>
     </div>
 
-    <!-- PAGE 4: MENU UTAMA -->
+    <!-- HALAMAN 4: MENU HORIZONTAL & POPUP -->
     <div id="page4" class="page">
-        <div class="glass" style="width: 90%; max-width: 400px; padding: 30px 20px;">
-            <h2 style="margin-bottom: 25px; font-family: 'Pacifico';">Pesan Spesial Untukmu 💌</h2>
-            <div class="menu-grid">
-                <button class="menu-btn" onclick="openModal('modal-kiri')">1. Pesan Dari Hati (Kiri)</button>
-                <button class="menu-btn" onclick="openModal('modal-tengah')">2. Tentang Website Ini (Tengah)</button>
-                <button class="menu-btn" onclick="openModal('modal-kanan')">3. Siapa Pembuatnya? (Kanan)</button>
+        <div class="glass-panel" style="max-width: 480px;">
+            <h2 style="color: #ff0055; margin-bottom: 15px;">Kotak Surat Spesial 💌</h2>
+            
+            <div class="horizontal-menu-container">
+                <button class="horizontal-btn" onclick="openPopup('popup-left')">💌 Kiri<br>(Ucapan)</button>
+                <button class="horizontal-btn" onclick="openPopup('popup-center')">💻 Tengah<br>(Tentang)</button>
+                <button class="horizontal-btn" onclick="openPopup('popup-right')">🐻 Kanan<br>(Pembuat)</button>
             </div>
-            <button class="next-btn" style="display: block; width: 100%; margin-top: 25px;" onclick="goToPage(5)">Lanjut ke Halaman 5 ➡️</button>
+
+            <button id="nav-to-p5" class="action-btn hidden" style="width: 100%; margin-top: 15px;" onclick="switchPageWithLoading(5)">Lanjut Ke Halaman 5 ➡️</button>
         </div>
 
-        <!-- Modals -->
-        <div id="modal-kiri" class="glass modal">
-            <span class="close-btn" onclick="closeModal('modal-kiri')">✖</span>
-            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Untuk Istriku Tersayang 💖</h3>
-            <div class="modal-content-text">
-                Selamat ulang tahun, sayangku, Tasya Kirani Azis! 💖✨<br><br>
-                Di hari yang sangat spesial ini, aku cuma ingin kamu tahu betapa bersyukurnya aku memilikimu. Aku tahu perjalanan kita nggak selalu mulus, kadang ada ombak dan ego yang menghalangi. Tapi percayalah, cintaku jauh lebih besar dari segala masalah yang ada. Aku nggak akan pernah menyerah untuk kita.<br><br>
-                Aku berkomitmen untuk terus membuktikan rasa sayangku, bukan cuma lewat kata-kata, tapi lewat setiap tindakan dan usahaku membahagiakanmu. Aku nggak akan pernah lari dari masalah, karena tempatku pulang selamanya adalah kamu. Semoga di umur yang baru ini, kamu semakin bahagia, sehat, dan selalu dalam lindungan-Nya. Aku mencintaimu lebih dari yang bisa dijelaskan oleh kode dan logika apapun. 🫶🏻
-            </div>
-        </div>
-
-        <div id="modal-tengah" class="glass modal">
-            <span class="close-btn" onclick="closeModal('modal-tengah')">✖</span>
-            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Dibalik Layar Website Ini 💻</h3>
-            <div class="modal-content-text">
-                Website ini dibuat sepenuh hati oleh suamimu, Fadly Rahman Al Wahid. 🧑🏻‍💻<br><br>
-                Setiap baris kode, setiap animasi yang bergerak, dan setiap warna pink yang ada di sini dirangkai khusus hanya untuk satu tujuan: melihat senyum manis di wajah Tasya Kirani Azis di hari ulang tahunnya. <br><br>
-                Mungkin ini terlihat sederhana, tapi ini adalah bentuk usahaku untuk memberikan sesuatu yang istimewa, mewah, dan abadi di dunia digital, sama seperti cintaku padamu di dunia nyata. Ini adalah caraku merayakan keberadaanmu yang sangat berharga dalam hidupku.
+        <!-- POPUP KIRI -->
+        <div id="popup-left" class="custom-popup">
+            <button class="btn-popup-back" onclick="closePopup('popup-left')">Kembali ✖</button>
+            <h3 style="color: #d81b60;">Ucapan Spesial Untuk Tasya Kirani Azis 💖</h3>
+            <div class="popup-scroll-text">
+                Selamat ulang tahun, sayangku, Tasya Kirani Azis! Istri sekaligus bidadari terbaik dalam hidupku. ✨🎉<br><br>
+                Di hari yang sangat penuh kegembiraan ini, aku ingin mengucapkan beribu kata syukur karena Tuhan telah menjaga dan mengirimkanmu untuk mendampingiku. Aku tahu betul perjalanan kita terkadang melewati badai, dan ada masa-masa yang menguji kesabaran kita. Tetapi dengarin ndutmu ini, sayang : Aku tidak akan pernah menyerah sedikitpun untuk mempertahankan dan memperjuangkan kebahagiaan kita.<br><br>
+                Cintaku padamu bukan sekadar kata-kata manis di layar ini, melainkan sebuah komitmen kuat yang akan terus aku buktikan lewat tindakan nyata setiap hari. Aku berjanji akan selalu berdiri paling depan untuk melindungimu, menjadi sandaran paling tenang di saat harimu berat, dan tidak akan pernah lari dari masalah apa pun yang menghampiri hubungan kita. Semoga di usiamu yang semakin matang ini, kamu selalu dilimpahi kesehatan, kebahagiaan batin, dan terus menemani langkahku selamanya. Aku sayang banget sama kamu bundaa🫶🏻💗✨
             </div>
         </div>
 
-        <div id="modal-kanan" class="glass modal">
-            <span class="close-btn" onclick="closeModal('modal-kanan')">✖</span>
-            <h3 style="margin-bottom: 15px; font-family: 'Pacifico';">Sang Pembuat (Developer) 🐻</h3>
-            <div class="modal-content-text">
-                <b>Pembuat Website:</b> Fadly Rahman Al Wahid (Ndut) 🐻<br><br>
-                <b>Tujuan Dibuatnya Website Ini:</b> Sebagai perayaan paling tulus dan spesial dari Ndut kepada istrinya tercinta. <br><br>
-                Website ini adalah bukti nyata bahwa Ndut selalu berusaha memberikan yang terbaik. Ndut ingin memastikan bahwa kamu merasa dirayakan, dihargai, dan dicintai sepenuhnya. Ndut janji akan terus ada, sabar menjaga hati kita, dan terus berinovasi untuk bikin istri Ndut selalu tersenyum bahagia setiap harinya! 💖✨
+        <!-- POPUP TENGAH -->
+        <div id="popup-center" class="custom-popup">
+            <button class="btn-popup-back" onclick="closePopup('popup-center')">Kembali ✖</button>
+            <h3 style="color: #d81b60;">Dibalik Pembuatan Website Ini 💻</h3>
+            <div class="popup-scroll-text">
+                Website ini dirancang dan dibuat dengan penuh kesungguhan oleh ndutmu tersayang, <b>Fadly Rahman Al Wahid</b>. <br><br>
+                aku ngebuat karya digital ini khusus sebagai kado istimewa dan ungkapan rasa gembira yang tak terhingga untuk merayakan hari kelahiran istri aku tercinta, <b>Tasya Kirani Azis</b>. <br><br>
+                Di balik setiap susunan kode program, animasi hati yang bergerak, dan keceriaan loading capybara, ada doa dan usaha tulus dariku agar kamu tau bahwa kamu adalah istrii aku tercinta. aku ingin perayaan ulang tahun kamu kali ini terasa unik, lucu, dan sebagai bukti nyata perhatian dari ndut kamu.
+            </div>
+        </div>
+
+        <!-- POPUP KANAN -->
+        <div id="popup-right" class="custom-popup">
+            <button class="btn-popup-back" onclick="closePopup('popup-right')">Kembali ✖</button>
+            <h3 style="color: #d81b60;">Status & Informasi Developer 🐻</h3>
+            <div class="popup-scroll-text">
+                <b>Pembuat Website :</b> Fadly Rahman Al Wahid ( NDUT ) 🐻<br><br>
+                <b>Tujuan Dibuatnya Website Ini:</b> Sebagai perayaan penuh cinta dari Ndut kepada Istri naa tercinta (Tasya).<br><br>
+                Status pembuat website ini adalah seorang ndut yang selalu berkomitmen tinggi untuk membuat istrinya tersenyum bahagia. Tujuan utama Ndut membuat sistem web ini adalah memastikan bahwa istrinya merasa sangat dihargai dan dicintai di hari jadinya. Ndut berjanji akan selalu menjaga kesabaran, meredam keegoisan dengan kelembutan, dan terus berjuang memberikan masa depan yang aman, tenang, dan penuh kebahagiaan buat kita berdua! 💖✨
             </div>
         </div>
     </div>
 
-    <!-- PAGE 5: PENUTUP -->
+    <!-- HALAMAN 5: PENUTUP -->
     <div id="page5" class="page">
-        <div class="glass" style="width: 90%; max-width: 450px;">
-            <div class="closing-text">
-                Terima kasih sudah bertahan bersamaku, menjadi kekuatanku, dan melengkapi separuh jiwaku. Mari kita terus genggam tangan satu sama lain, meredam ego dengan kasih sayang, dan membangun masa depan yang indah bersama.<br><br>
-                Selamat Ulang Tahun, Bidadariku.
-            </div>
-            <div class="tasyhid">TASYHID SELAMANYA🫶🏻💖✨</div>
+        <div class="glass-panel" style="max-width: 500px;">
+            <p style="font-size: 1rem; line-height: 1.8; color: #880e4f; text-align: justify; font-weight: 700;">
+                Terima kasih ya sayang, sudah bersedia berjalan bersamaku, melengkapi kekuranganku, dan menjadi bagian terindah dalam takdir hidupku. Mari kita terus saling menggenggam erat, menyelesaikan setiap problem dengan ketulusan hati, dan menjaga keharmonisan hubungan kita dengan kasih sayang yang utuh.<br><br>
+                Selamat ulang tahun sayangku🫶🏻💗✨.
+            </p>
+            <div class="tasyhid-forever">TASYHID SELAMANYA🫶🏻💖✨</div>
         </div>
     </div>
 
     <script>
-        // BACKGROUND HEARTS ANIMATION
-        function createHearts() {
-            const container = document.getElementById('bg-hearts-container');
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('bg-heart');
-                heart.innerText = ['❤️', '💖', '✨', '🫶🏻'][Math.floor(Math.random() * 4)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-                container.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 6000);
-            }, 500);
-        }
-        createHearts();
+        // 1. ANIMASI EMBEL-EMBEL LOVE MELAYANG
+        const heartsWrapper = document.getElementById('bg-hearts');
+        const heartIcons = ['❤️', '💖', '✨', '🫶🏻', '💕'];
+        setInterval(() => {
+            const blockLove = document.createElement('div');
+            blockLove.classList.add('floating-heart');
+            blockLove.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            blockLove.style.left = Math.random() * 100 + 'vw';
+            blockLove.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heartsWrapper.appendChild(blockLove);
+            setTimeout(() => { blockLove.remove(); }, 6500);
+        }, 400);
 
-        // PAGE NAVIGATION
-        function goToPage(pageNum) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page' + pageNum).classList.add('active');
-        }
-
-        // PAGE 1 TO PAGE 2 AUTO TRANSITION
-        setTimeout(() => {
-            goToPage(2);
-        }, 4500); // Intro plays for 4.5 seconds
-
-        // PAGE 2: BOOK LOGIC
-        const images = ['fotov1.png', 'fotov2.png', 'fotov3.png', 'fotov4.png'];
-        let currentImgIndex = 0;
-        const bookPage = document.getElementById('book-page');
-        let pagesViewed = 0;
-
-        function updateBook() {
-            bookPage.style.backgroundImage = `url('${images[currentImgIndex]}')`;
-            // Sembunyikan teks placeholder jika foto gagal diload
-            document.getElementById('page-placeholder').innerText = `Halaman ${currentImgIndex + 1} (${images[currentImgIndex]})`;
-            document.getElementById('page-placeholder').style.opacity = "0.5";
+        // 2. SISTEM LOADING SCREEN CAPYBARA (0-100%)
+        function switchPageWithLoading(nextPageNum) {
+            const loader = document.getElementById('loading-screen');
+            const progBar = document.getElementById('load-progress');
+            const percentText = document.getElementById('load-percentage');
+            const capy = document.getElementById('capybara-sprite');
             
-            if (currentImgIndex === images.length - 1) {
-                document.getElementById('btn-to-page3').style.display = 'block';
-            }
-        }
+            // Reset state loading
+            let count = 0;
+            progBar.style.width = '0%';
+            percentText.innerText = '0%';
+            capy.style.left = '0%';
+            
+            // Tampilkan loading screen
+            loader.classList.add('show');
 
-        function nextPage() {
-            if (currentImgIndex < images.length - 1) {
-                currentImgIndex++;
-                updateBook();
-            }
-        }
-        function prevPage() {
-            if (currentImgIndex > 0) {
-                currentImgIndex--;
-                updateBook();
-            }
-        }
-
-        // PAGE 3: LOVE PUZZLE GAME
-        const puzzleGrid = document.getElementById('puzzle');
-        // Kordinat array untuk membentuk hati di grid 5x5 (indeks 0-24)
-        const heartPattern = [1, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 22]; 
-        let clickedCells = new Set();
-
-        for (let i = 0; i < 25; i++) {
-            let cell = document.createElement('div');
-            cell.classList.add('puzzle-cell');
-            cell.onclick = function() {
-                if (this.classList.contains('filled')) {
-                    this.classList.remove('filled');
-                    clickedCells.delete(i);
-                } else {
-                    this.classList.add('filled');
-                    clickedCells.add(i);
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 4) + 2; // Naik acak biar realistis
+                if (count >= 100) {
+                    count = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        // Sembunyikan loading, aktifkan page tujuan
+                        loader.classList.remove('show');
+                        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                        document.getElementById('page' + nextPageNum).classList.add('active');
+                    }, 400);
                 }
-                checkWin();
-            };
-            puzzleGrid.appendChild(cell);
+                progBar.style.width = count + '%';
+                percentText.innerText = count + '%';
+                capy.style.left = `calc(${count}% - 20px)`; // Capybara ikut jalan maju
+            }, 60);
         }
 
-        function checkWin() {
-            let isWin = true;
-            if (clickedCells.size !== heartPattern.length) isWin = false;
-            heartPattern.forEach(val => {
-                if (!clickedCells.has(val)) isWin = false;
-            });
+        // Transisi otomatis dari Page 1 (Intro) ke Page 2 setelah teks memudar
+        setTimeout(() => {
+            switchPageWithLoading(2);
+        }, 5200);
 
-            if (isWin) {
-                document.getElementById('puzzle-success').style.display = 'block';
-                document.getElementById('btn-to-page4').style.display = 'block';
-                // Lock the grid
-                puzzleGrid.style.pointerEvents = 'none';
+        // 3. LOGIKA BUKU FOTO (HALAMAN 2)
+        const bookImages = ['cover', 'fotov1.png', 'fotov2.png', 'fotov3.png', 'fotov4.png'];
+        let activeImgIdx = 0;
+        const bookSurface = document.getElementById('book-surface');
+        const coverView = document.getElementById('cover-view');
+
+        function updateBookView() {
+            if (activeImgIdx === 0) {
+                bookSurface.style.backgroundImage = 'none';
+                bookSurface.style.backgroundColor = '#fff';
+                coverView.style.display = 'block';
+            } else {
+                coverView.style.display = 'none';
+                bookSurface.style.backgroundImage = `url('${bookImages[activeImgIdx]}')`;
+                bookSurface.style.backgroundColor = '#ffdae0'; // Fallback warna jika gambar lambat load
+            }
+
+            // Jika buku sudah dibuka penuh sampai halaman 4 (index terakhir), munculkan tombol lanjut halaman 3
+            if (activeImgIdx === bookImages.length - 1) {
+                document.getElementById('nav-to-p3').classList.remove('hidden');
             }
         }
 
-        // PAGE 4: MODALS
-        function openModal(id) {
-            document.getElementById(id).classList.add('show');
+        function turnLeft() {
+            if (activeImgIdx < bookImages.length - 1) {
+                activeImgIdx++;
+                bookSurface.style.transform = 'rotateY(-10deg) scale(0.98)';
+                setTimeout(() => { bookSurface.style.transform = 'rotateY(0deg) scale(1)'; }, 150);
+                updateBookView();
+            }
         }
+
+        function turnRight() {
+            if (activeImgIdx > 0) {
+                activeImgIdx--;
+                bookSurface.style.transform = 'rotateY(10deg) scale(0.98)';
+                setTimeout(() => { bookSurface.style.transform = 'rotateY(0deg) scale(1)'; }, 150);
+                updateBookView();
+            }
+        }
+
+        // 4. LOGIKA GAME LOVE BLOCKS (HALAMAN 3)
+        const pzBoard = document.getElementById('puzzle-board');
+        let activatedBlocks = 0;
+        const targetBlocks = 12; // Jumlah block love dalam grid
+
+        for (let i = 0; i < targetBlocks; i++) {
+            let item = document.createElement('div');
+            item.classList.add('love-shape-block');
+            item.onclick = function() {
+                if (!this.classList.contains('active')) {
+                    this.classList.add('active');
+                    activatedBlocks++;
+                    checkGameStatus();
+                }
+            };
+            pzBoard.appendChild(item);
+        }
+
+        function checkGameStatus() {
+            if (activatedBlocks === targetBlocks) {
+                document.getElementById('puzzle-win-msg').classList.remove('hidden');
+                document.getElementById('nav-to-p4').classList.remove('hidden');
+            }
+        }
+
+        // 5. LOGIKA MODAL POPUP & DETEKSI MEMBACA (HALAMAN 4)
+        let openedMenus = new Set();
+
+        function openPopup(id) {
+            document.getElementById(id).classList.add('open');
+            openedMenus.add(id);
+            // Tombol lanjut halaman 5 muncul setelah ketiga popup dibuka & dibaca semua
+            if (openedMenus.size === 3) {
+                document.getElementById('nav-to-p5').classList.remove('hidden');
+            }
+        }
+
         function closeModal(id) {
-            document.getElementById(id).classList.remove('show');
+            // Alias fungsi untuk konsistensi penamaan pembukaan/penutupan
+            document.getElementById(id).classList.remove('open');
+        }
+        
+        function closePopup(id) {
+            document.getElementById(id).classList.remove('open');
         }
     </script>
 </body>
